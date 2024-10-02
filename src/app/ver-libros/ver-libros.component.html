@@ -1,1 +1,12 @@
-<p>ver-libros works!</p>
+<div class="container-libro">
+    <h1>{{ clubInfo.title }}</h1>
+  
+    <div class="card-libro">
+      <h2>{{ clubInfo.title }}</h2>
+      <p>Autor: {{ clubInfo.autor }}</p>
+      <p>Genero: {{ clubInfo.genero }}</p>
+      <p>Proreso: {{clubInfo.estado}}</p>
+      <p>Fecha de creación: {{ clubInfo.fecha | date:'dd/MM/yyyy' }}</p>
+      <a href="#" class="exit-libro">{{ clubInfo.exit }}</a>
+    </div>
+</div>

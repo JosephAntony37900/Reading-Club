@@ -1,1 +1,15 @@
-<p>mis-libros works!</p>
+<div>
+    <div class="Mis-libros-content">
+      <h2>Mis Libros</h2>
+      <div class="libros-grid">
+        <div *ngFor="let libro of libros" class="libro-card">
+          <p>{{ libro.title }}</p>
+        </div>
+        <!-- Tarjeta para agregar un nuevo libro -->
+        <div class="agregar-libro" (click)="agregarLibro()">
+          <p>+</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
