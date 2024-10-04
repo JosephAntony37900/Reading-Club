@@ -1,1 +1,26 @@
-<p>ver-clubs works!</p>
+<div class="container">
+    <h1>{{ clubInfo.title }}</h1>
+  
+    <div class="card">
+      <h2>{{ clubInfo.title }}</h2>
+      <p>Localización: {{ clubInfo.localizacion }}</p>
+      <p>Miembros: {{ clubInfo.miembros }}</p>
+      <p>Fecha de creación: {{ clubInfo.fecha | date:'dd/MM/yyyy' }}</p>
+      <a href="#" class="exit">{{ clubInfo.exit }}</a>
+    </div>
+  
+    <h3>Chat de Discusión:</h3>
+    <div class="chat-section">
+      <div *ngFor="let comentario of comentarios" class="comentario">
+        <h4>🗣 {{ comentario.usuario }}</h4>
+        <p>{{ comentario.mensaje }}</p>
+      </div>
+  
+      <div class="comment-form">
+        <label for="comentario">Agregar comentario</label>
+        <textarea id="comentario" rows="3"></textarea>
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+  

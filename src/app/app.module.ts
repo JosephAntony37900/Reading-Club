@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,17 @@ import { HeaderComponentComponent } from './header-component/header-component.co
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { CardsComponentComponent } from './cards-component/cards-component.component';
 import { FormComponentComponent } from './form-component/form-component.component';
+import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
+const router: Routes = [
+  {path: "", component: MisLibrosComponent},
+  {path: "agregarLibro", component: AgregarLibrosComponent},
+  {path: "verClub/:id", component: VerClubsComponent},
+  {path: "verLibro/:id", component: VerLibrosComponent},
+  {path: "agregarClub", component: AgregarClubsComponent},
+  {path: "misClubs", component: MisClubsComponent},
+]
 
 @NgModule({
   declarations: [
@@ -34,7 +46,10 @@ import { FormComponentComponent } from './form-component/form-component.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(router),
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration()
