@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,8 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 const router: Routes = [
   {path: "", component: MisLibrosComponent},
   {path: "agregarLibro", component: AgregarLibrosComponent},
-  {path: "verClub", component: VerClubsComponent},
-  {path: "verLibro", component: VerLibrosComponent},
+  {path: "verClub/:id", component: VerClubsComponent},
+  {path: "verLibro/:id", component: VerLibrosComponent},
   {path: "agregarClub", component: AgregarClubsComponent},
   {path: "misClubs", component: MisClubsComponent},
 ]
@@ -48,6 +49,7 @@ const router: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(router),
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration()

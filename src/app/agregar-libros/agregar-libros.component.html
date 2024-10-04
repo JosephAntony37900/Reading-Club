@@ -1,8 +1,8 @@
 <div class="agregar-libro-container">
     <h2>Agregar Libro</h2>
     <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-      <label for="name">Titulo</label>
-      <input id="name" formControlName="name" placeholder="Titulo del libro" type="text" />
+      <label for="title">Titulo</label>
+      <input id="title" formControlName="title" placeholder="Titulo del libro" type="text" />
   
       <label for="autor">Autor</label>
       <input id="autor" formControlName="autor" placeholder="Autor del libro" type="text" />
@@ -10,18 +10,18 @@
       <label for="genero">Genero</label>
       <input id="genero" formControlName="genero" placeholder="Genero del libro, aventura, acción, etc" type="text" />
   
-      <label for="fecha">Fecha de lectura</label>
-      <input id="fecha" formControlName="fecha" placeholder="Fecha" type="date" />
+      <label for="date">Fecha de lectura</label>
+      <input id="date" formControlName="date" placeholder="Fecha" type="date" />
   
-      <label for="eleccion">Estado de lectura</label>
-      <select id="eleccion" formControlName="eleccion">
+      <label for="state">Estado de lectura</label>
+      <select id="state" formControlName="state">
         <option value="leído">Leído</option>
         <option value="en progreso">En progreso</option>
         <option value="no leído">No leído</option>
       </select>
   
-      <label for="descripcion">Reseña General</label>
-      <textarea id="descripcion" formControlName="descripcion" placeholder="Reseña"></textarea>
+      <label for="review">Reseña General</label>
+      <textarea id="review" formControlName="review" placeholder="Reseña"></textarea>
   
       <button type="submit" [disabled]="bookForm.invalid">Agregar Libro</button>
     </form>

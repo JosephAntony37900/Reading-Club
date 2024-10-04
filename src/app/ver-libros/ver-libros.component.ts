@@ -1,21 +1,30 @@
-import { Component } from '@angular/core';
-import { MegaCard } from '../interfaces/mega-card';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BookService } from '../services/book.service';
 
 @Component({
   selector: 'app-ver-libros',
   templateUrl: './ver-libros.component.html',
-  styleUrl: './ver-libros.component.css'
+  styleUrls: ['./ver-libros.component.css']
 })
-export class VerLibrosComponent {
-  clubInfo: MegaCard = {
-    title: 'Reading Club',
-    localizacion: '',
-    miembros: 1,
-    fecha: new Date(2024, 8, 29),
-    exit: 'Salir del libro',
-    autor: 'Pinto',
-    genero: 'Procastinación',
-    estado: 'Sin dinero'
-  };
+export class VerLibrosComponent implements OnInit {
+  libro: any;
 
+  constructor(private route: ActivatedRoute, private bookService: BookService) {}
+
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id'); // Obtener el ID desde la URL
+  
+    if (id) {
+      this.bookService.getBookById(id).subscribe({
+        next: (data) => {
+          this.libro = data;
+        },
+        error: (error) => {
+          console.error('Error al obtener los detalles del libro:', error);
+        }
+      });
+    }
+  }
+  
 }
