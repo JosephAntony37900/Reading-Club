@@ -28,6 +28,16 @@ export class ClubService {
     });
     return this.http.post(`${this.apiUrl}/clubs`, clubData, { headers });
   }
+  
+  // Eliminar un club
+  deleteClub(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/clubs/delete/${id}`);
+  }
+
+
+  updateClub(id: string, clubData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/clubs/${id}`, clubData);
+  }
 
   // Obtener todos los libros
   getBooks(): Observable<any> {

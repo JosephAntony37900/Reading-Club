@@ -19,6 +19,7 @@ import { FormComponentComponent } from './form-component/form-component.componen
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const router: Routes = [
   {path: "", component: MisLibrosComponent},
@@ -51,7 +52,8 @@ const router: Routes = [
     RouterModule.forRoot(router),
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule,
   ],
   providers: [
     provideClientHydration()

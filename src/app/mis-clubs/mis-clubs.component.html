@@ -2,7 +2,7 @@
     <div class="Mis-clubs-content">
       <h2>Mis Clubs</h2>
       <div class="clubs-grid">
-        <div *ngFor="let club of clubs" class="club-card">
+        <div *ngFor="let club of clubs" class="club-card" (click)="verClub(club.id)">
           <p>{{ club.name }}</p>
         </div>
         <!-- Tarjeta para agregar un nuevo libro -->
@@ -14,7 +14,7 @@
     <div class="Mis-clubs-content">
         <h2>Otros Clubs</h2>
         <div class="clubs-grid">
-          <div *ngFor="let club of clubs" class="club-card">
+          <div *ngFor="let club of clubs" class="club-card" (click)="verClub(club.id)">
             <p>{{ club.name }}</p>
           </div>
           

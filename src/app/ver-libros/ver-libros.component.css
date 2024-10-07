@@ -26,15 +26,16 @@
   }
 
   .card-libro p {
-    line-height: 9.8;
+    line-height: 8.0;
   }
   
-  .exit-libro {
+  .exit {
     display: block;
     margin-top: 20px;
     text-decoration: none;
     color: black;
     font-weight: bold;
+    margin: 20px;
   }
 
 input {
