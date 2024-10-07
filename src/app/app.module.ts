@@ -18,6 +18,7 @@ import { CardsComponentComponent } from './cards-component/cards-component.compo
 import { FormComponentComponent } from './form-component/form-component.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 const router: Routes = [
   {path: "", component: MisLibrosComponent},
@@ -50,6 +51,7 @@ const router: Routes = [
     RouterModule.forRoot(router),
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()

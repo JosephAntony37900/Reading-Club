@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClubService } from '../services/club.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-clubs',
@@ -11,7 +12,7 @@ export class AgregarClubsComponent implements OnInit {
   clubForm: FormGroup;
   books: any[] = [];  // Aquí almacenaremos los libros obtenidos de la API
 
-  constructor(private fb: FormBuilder, private clubService: ClubService) {
+  constructor(private fb: FormBuilder, private clubService: ClubService, private router: Router) {
     this.clubForm = this.fb.group({
       name: ['', Validators.required],
       location: ['', Validators.required],
@@ -40,7 +41,7 @@ export class AgregarClubsComponent implements OnInit {
       this.clubService.addClub(this.clubForm.value).subscribe({
         next: (response) => {
           console.log('Club creado:', response);
-          // Lógica adicional, como redirigir o mostrar un mensaje de éxito
+          this.router.navigate(['/misClubs']);
         },
         error: (error) => {
           console.error('Error al crear un club:', error);

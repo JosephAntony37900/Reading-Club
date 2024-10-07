@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BookService } from '../services/book.service'; // Importar el servicio
+import { BookService } from '../services/book.service'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-libros',
@@ -10,7 +11,7 @@ import { BookService } from '../services/book.service'; // Importar el servicio
 export class AgregarLibrosComponent {
   bookForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private bookService: BookService) {
+  constructor(private fb: FormBuilder, private bookService: BookService, private router: Router) {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       autor: ['', Validators.required],
@@ -27,7 +28,7 @@ export class AgregarLibrosComponent {
       this.bookService.addBook(this.bookForm.value).subscribe({
         next: (response) => {
           console.log('Libro agregado:', response);
-          // Puedes agregar lógica para redirigir o mostrar un mensaje de éxito
+          this.router.navigate(['/']);
         },
         error: (error) => {
           console.error('Error al agregar libro:', error);
