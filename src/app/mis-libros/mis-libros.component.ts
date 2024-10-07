@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../services/book.service';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-mis-libros',
@@ -24,6 +25,10 @@ export class MisLibrosComponent implements OnInit {
 
   agregarLibro() {
     this.router.navigate(['/agregarLibro']);
+  }
+
+  verLibro(id: number) {
+    this.router.navigate([`/verLibro/${id}`]); //aquí es donde deberia de implementar la lógica
   }
   
 }
