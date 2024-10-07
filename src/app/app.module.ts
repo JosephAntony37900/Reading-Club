@@ -28,6 +28,7 @@ const router: Routes = [
   {path: "verLibro/:id", component: VerLibrosComponent},
   {path: "agregarClub", component: AgregarClubsComponent},
   {path: "misClubs", component: MisClubsComponent},
+  {path: "login", component: LoginComponent},
 ]
 
 @NgModule({

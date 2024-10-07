@@ -29,19 +29,18 @@
         <button (click)="cancel()">Cancelar</button>
       </div>
     </div>
-  //aqui ayudame 
-    <h3>Chat de Discusión:</h3> 
-    <div class="chat-section">
-      <div *ngFor="let comentario of comentarios" class="comentario">
-        <h4>🗣 {{ comentario.usuario }}</h4>
-        <p>{{ comentario.mensaje }}</p>
-      </div>
+    
+  <h3>Chat de Discusión:</h3>
+  <div class="chat-section">
+    <div *ngFor="let comentario of comentarios" class="comentario">
+      <h4>🗣 Joseph</h4>
+      <p>{{ comentario.comments }}</p>
+    </div>
   
-      <div class="comment-form">
-        <label for="comentario">Agregar comentario</label>
-        <textarea id="comentario" rows="3"></textarea>
-        <button type="submit">Submit</button>
-      </div>
+    <div class="comment-form">
+      <label for="comentario">Agregar comentario</label>
+      <textarea id="comentario" rows="3" [(ngModel)]="nuevoComentario"></textarea>
+      <button type="button" id="button-comment" (click)="agregarComentario()">Submit</button>
     </div>
   </div>
 
