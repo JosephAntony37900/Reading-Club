@@ -26,4 +26,8 @@ export class MisClubsComponent implements OnInit {
   agregarClub() {
     this.router.navigate(['/agregarClub'])
   }
+
+  verClub(id: number){
+    this.router.navigate([`/verClub/${id}`])
+  }
 }

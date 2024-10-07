@@ -35,6 +35,7 @@
       <span *ngIf="!editMode">{{ libro.review }}</span>
       <textarea *ngIf="editMode" [(ngModel)]="editableLibro.review"></textarea>
     </p>
+    <a routerLink="/" class="exit">Salir del libro</a>
 <button *ngIf="!editMode" (click)="edit()">Editar</button>
 <button *ngIf="libro" (click)="openModal()">Eliminar</button>
     <div *ngIf="editMode">

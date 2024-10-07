@@ -18,6 +18,10 @@
     justify-items: center;
     margin-top: 50px;
   }
+
+  .libro-card p{
+    font-size: 20px;
+  }
   
   .libro-card, .agregar-libro {
     width: 200px;
