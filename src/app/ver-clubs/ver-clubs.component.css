@@ -55,6 +55,17 @@
     margin-bottom: 20px;
     border: 1px solid #ccc;
   }
+
+  #comentario{
+    width: 100%;
+  }
+
+  #button-comment {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    margin-top: 10px;
+  }
   
   .comment-form {
     margin-top: 30px;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClubService } from '../services/club.service';
+import { MemberService } from '../services/member.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-ver-clubs',
@@ -12,8 +13,10 @@ export class VerClubsComponent {
   editableClub: any;
   editMode: boolean= false;
   showModal: boolean= false;
+  comentarios: any[] = [];  // Lista de comentarios
+  nuevoComentario: string = '';  // Almacenar nuevo comentario
 
-  constructor(private route: ActivatedRoute, private clubService: ClubService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private clubService: ClubService, private memberService: MemberService, private router: Router) {}
   
   ngOnInit(){
     const id = this.route.snapshot.paramMap.get('id');
@@ -27,6 +30,8 @@ export class VerClubsComponent {
             console.error('Error al obtener los detalles del club')
         },
       })
+      // Cargar comentarios existentes
+      this.loadComments();
     }
   }
 
@@ -54,6 +59,8 @@ export class VerClubsComponent {
           console.error('Error al eliminar el libro:', error);
         }
       });
+
+      
     }
   }
 
@@ -81,9 +88,36 @@ export class VerClubsComponent {
   }
 
   
-  comentarios = [
-    { usuario: 'Nombre de usuario 1', mensaje: 'Este es el primer comentario predeterminado del chat.' },
-    { usuario: 'Nombre de usuario 2', mensaje: 'Este es el segundo comentario predeterminado del chat.' },
-    { usuario: 'Nombre de usuario 3', mensaje: 'Este es el tercer comentario predeterminado del chat.' }
-  ];
+  loadComments() {
+    this.memberService.getAllComments().subscribe({
+      next: (data) => {
+        this.comentarios = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar comentarios:', error);
+      }
+    });
+  }
+
+  agregarComentario() {
+    if (this.nuevoComentario.trim()) {
+      const nuevoComentario = {
+        idUser: 1, // Cambia esto según corresponda
+        comments: this.nuevoComentario
+      };
+  
+      this.memberService.createComment(nuevoComentario).subscribe({
+        next: (data) => {
+          this.comentarios.push(data);  // Agrega el nuevo comentario a la lista
+          this.nuevoComentario = '';    // Limpia el campo
+        },
+        error: (error) => {
+          console.error('Error al agregar el comentario:', error);
+        }
+      });
+    } else {
+      console.error('El comentario no puede estar vacío');
+    }
+  }
+  
 }
