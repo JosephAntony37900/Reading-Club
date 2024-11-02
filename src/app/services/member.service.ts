@@ -7,20 +7,25 @@ import { Observable } from 'rxjs';
 })
 export class MemberService {
 
-  private apiUrl = 'http://localhost:3000/members';
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
   // Obtener todos los comentarios de un club
   getAllComments(clubId: number): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/coment/club/${clubId}`);
+    return this.http.get<any>(`${this.apiUrl}/coment/club/${clubId}`);
+  }
+
+  // Obtener el ID del miembro autenticado
+  getMemberId(userId: number, clubId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/members/${userId}/club/${clubId}`);
   }
 
   createComment(comment: any): Observable<any> {
-    return this.http.post<any>(`http://localhost:3000/coment`, comment);
+    return this.http.post<any>(`${this.apiUrl}/coment`, comment);
   }
-  
+
   deleteComment(id: number): Observable<any> {
-    return this.http.delete<any>(`http://localhost:3000/coment/delete/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/coment/delete/${id}`);
   }
 }

@@ -18,6 +18,7 @@ export class VerClubsComponent implements OnInit {
   comentarios: any[] = []; // Lista de comentarios
   nuevoComentario: string = ''; // Almacenar nuevo comentario
   userId: number | null = null; // Para obtener el ID del usuario autenticado
+  userName: string | null = null; // Para obtener el nombre del usuario autenticado
 
   constructor(
     private route: ActivatedRoute,
@@ -31,19 +32,19 @@ export class VerClubsComponent implements OnInit {
     this.usersService.getUserData().subscribe({
       next: (data) => {
         this.userId = data.id;
+        this.userName = data.name_User; // Asume que el nombre de usuario se llama 'name_User'
         const id = this.route.snapshot.paramMap.get('id');
 
         if (id) {
           this.clubService.getClubById(id).subscribe({
             next: (data) => {
               this.clubInfo = data;
+              this.loadComments(parseInt(id, 10));
             },
             error: (error) => {
               console.error('Error al obtener los detalles del club');
             }
           });
-          // Cargar comentarios existentes
-          this.loadComments();
         }
       },
       error: (error) => {
@@ -102,27 +103,26 @@ export class VerClubsComponent implements OnInit {
     }
   }
 
-  loadComments() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.memberService.getAllComments(parseInt(id, 10)).subscribe({
-        next: (data) => {
-          this.comentarios = data;
-        },
-        error: (error) => {
-          console.error('Error al cargar comentarios:', error);
-        }
-      });
-    }
+  loadComments(clubId: number) {
+    this.memberService.getAllComments(clubId).subscribe({
+      next: (data) => {
+        this.comentarios = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar comentarios:', error);
+      }
+    });
   }
 
   agregarComentario() {
-    if (this.nuevoComentario.trim()) {
+    const id = this.route.snapshot.paramMap.get('id'); // Obtener el ID del club
+    if (this.nuevoComentario.trim() && id && this.userId !== null && this.userName !== null) {
       const nuevoComentario = {
-        idUser: this.userId, // Aquí usa el ID del usuario autenticado
-        comments: this.nuevoComentario
+        comments: this.nuevoComentario,
+        idClub: parseInt(id, 10), // Asegura que el comentario esté asociado al club actual
+        userName: this.userName // Incluye el nombre del usuario en el comentario
       };
-
+      console.log("Datos del nuevo comentario:", nuevoComentario);
       this.memberService.createComment(nuevoComentario).subscribe({
         next: (data) => {
           this.comentarios.push(data); // Agrega el nuevo comentario a la lista
