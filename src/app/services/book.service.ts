@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Users_Service } from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,15 @@ export class BookService {
 
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private usersService: Users_Service) { }
 
-  // Obtener todos los libros
-  getBooks(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/books`);
+  // Obtener todos los libros del usuario autenticado
+  getBooksByUser(userId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.usersService.getToken()}`
+    });
+    return this.http.get(`${this.apiUrl}/books/user/${userId}`, { headers });
   }
 
   // Crear un libro nuevo

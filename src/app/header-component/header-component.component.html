@@ -9,10 +9,15 @@
                 <li><a routerLink="/agregarLibro">Agregar Libro</a></li>
                 <li><a routerLink="/agregarClub">Crear Club</a></li>
                 <li><a routerLink="misClubs">Ver Clubs</a></li>
+                
             </ul>
         </nav>
+       
         <div class="nav-responsive">
-            <i></i>
-        </div>
+            <i class="fa-solid fa-bars"></i>
+        </div> 
+        <div class="nav-icon-profile">
+            <a routerLink="/login"><fa-icon [icon]="faUser"></fa-icon></a>
+         </div>
     </header>
 </div>

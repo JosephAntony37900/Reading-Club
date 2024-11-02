@@ -1,17 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BookService } from '../services/book.service'; 
+import { BookService } from '../services/book.service';
 import { Router } from '@angular/router';
+import { Users_Service } from '../services/users.service';
 
 @Component({
   selector: 'app-agregar-libros',
   templateUrl: './agregar-libros.component.html',
   styleUrls: ['./agregar-libros.component.css']
 })
-export class AgregarLibrosComponent {
+export class AgregarLibrosComponent implements OnInit {
   bookForm: FormGroup;
+  userId: number | null = null;
 
-  constructor(private fb: FormBuilder, private bookService: BookService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private bookService: BookService,
+    private usersService: Users_Service,
+    private router: Router
+  ) {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       autor: ['', Validators.required],
@@ -19,10 +26,22 @@ export class AgregarLibrosComponent {
       date: ['', Validators.required],
       state: ['', Validators.required],
       review: ['', Validators.required],
-      user_Id: ['1']
+      user_Id: ['']
     });
   }
-  
+
+  ngOnInit() {
+    this.usersService.getUserData().subscribe({
+      next: (data) => {
+        this.userId = data.id;
+        this.bookForm.patchValue({ user_Id: this.userId });
+      },
+      error: (error) => {
+        console.error('Error al obtener datos del usuario:', error);
+      }
+    });
+  }
+
   onSubmit() {
     if (this.bookForm.valid) {
       this.bookService.addBook(this.bookForm.value).subscribe({

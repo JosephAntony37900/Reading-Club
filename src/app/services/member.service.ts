@@ -7,22 +7,20 @@ import { Observable } from 'rxjs';
 })
 export class MemberService {
 
-  private apiUrl = 'http://localhost:3000/members'; // Cambia el puerto según tu configuración
+  private apiUrl = 'http://localhost:3000/members';
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todos los comentarios
-  getAllComments(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`);
+  // Obtener todos los comentarios de un club
+  getAllComments(clubId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/coment/club/${clubId}`);
   }
 
-  // Crear un comentario
   createComment(comment: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}`, comment);
+    return this.http.post<any>(`http://localhost:3000/coment`, comment);
   }
   
-  // Eliminar comentario
   deleteComment(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete<any>(`http://localhost:3000/coment/delete/${id}`);
   }
 }
