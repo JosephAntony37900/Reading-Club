@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { AuthInterceptor } from './services/auth.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MisLibrosComponent } from './mis-libros/mis-libros.component';
@@ -20,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JoinClubModalComponent } from './join-club-modal/join-club-modal.component';
 
 const router: Routes = [
   {path: "", component: MisLibrosComponent},
@@ -29,6 +31,7 @@ const router: Routes = [
   {path: "agregarClub", component: AgregarClubsComponent},
   {path: "misClubs", component: MisClubsComponent},
   {path: "login", component: LoginComponent},
+  {path: "registrarse", component: RegistrerComponent},
 ]
 
 @NgModule({
@@ -45,7 +48,8 @@ const router: Routes = [
     HeaderComponentComponent,
     FooterComponentComponent,
     CardsComponentComponent,
-    FormComponentComponent
+    FormComponentComponent,
+    JoinClubModalComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,12 @@ const router: Routes = [
     FontAwesomeModule,
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

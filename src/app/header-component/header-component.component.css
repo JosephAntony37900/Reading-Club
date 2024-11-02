@@ -41,10 +41,12 @@
 }
 
 .nav-responsive {
-    background-color: #825B32;
+    background-color: #ffffff;
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     display: none;
   }
+
+/* SECCION RESPONSIVE */

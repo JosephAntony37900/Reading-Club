@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClubService } from '../services/club.service';
+import { BookService } from '../services/book.service';
 import { Router } from '@angular/router';
+import { Users_Service } from '../services/users.service';
 
 @Component({
   selector: 'app-agregar-clubs',
@@ -10,30 +12,52 @@ import { Router } from '@angular/router';
 })
 export class AgregarClubsComponent implements OnInit {
   clubForm: FormGroup;
-  books: any[] = [];  // Aquí almacenaremos los libros obtenidos de la API
+  books: any[] = [];
+  userId: number | null = null;
 
-  constructor(private fb: FormBuilder, private clubService: ClubService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private clubService: ClubService,
+    private bookService: BookService,
+    private usersService: Users_Service,
+    private router: Router
+  ) {
     this.clubForm = this.fb.group({
       name: ['', Validators.required],
       location: ['', Validators.required],
       members: ['', Validators.required],
       date: ['', Validators.required],
-      idBook: ['', Validators.required],  // Ahora es requerido
+      idBook: ['', Validators.required],
       description: ['', Validators.required],
-      idOwner: ['1']  // El ID del propietario, puedes cambiarlo si es necesario
+      idOwner: [''] // Este campo se actualizará con el ID del usuario autenticado
     });
   }
 
   ngOnInit(): void {
-    // Obtener los libros cuando se cargue el componente
-    this.clubService.getBooks().subscribe({
-      next: (response) => {
-        this.books = response;  // Guarda la lista de libros
+    // Obtener los datos del usuario autenticado
+    this.usersService.getUserData().subscribe({
+      next: (data) => {
+        this.userId = data.id;
+        this.clubForm.patchValue({ idOwner: this.userId });
+        this.loadBooks(); // Cargar los libros después de obtener el userId
       },
       error: (error) => {
-        console.error('Error al obtener los libros:', error);
+        console.error('Error al obtener datos del usuario:', error);
       }
     });
+  }
+
+  loadBooks() {
+    if (this.userId !== null) { // Asegurarse de que userId no sea null
+      this.bookService.getBooksByUser(this.userId).subscribe({
+        next: (response) => {
+          this.books = response;
+        },
+        error: (error) => {
+          console.error('Error al obtener los libros:', error);
+        }
+      });
+    }
   }
 
   onSubmit() {

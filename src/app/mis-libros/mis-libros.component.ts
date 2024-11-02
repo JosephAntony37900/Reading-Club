@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../services/book.service';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { Users_Service } from '../services/users.service';
+
 @Component({
   selector: 'app-mis-libros',
   templateUrl: './mis-libros.component.html',
@@ -9,18 +10,37 @@ import { Router } from '@angular/router';
 })
 export class MisLibrosComponent implements OnInit {
   libros: any[] = [];
+  userId: number | null = null;
 
-  constructor(private bookService: BookService, private router: Router) {}
+  constructor(
+    private bookService: BookService,
+    private usersService: Users_Service,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.bookService.getBooks().subscribe({
+    this.usersService.getUserData().subscribe({
       next: (data) => {
-        this.libros = data;
+        this.userId = data.id;
+        this.loadBooks();
       },
       error: (error) => {
-        console.error('Error al obtener libros:', error);
+        console.error('Error al obtener datos del usuario:', error);
       }
     });
+  }
+
+  loadBooks() {
+    if (this.userId) {
+      this.bookService.getBooksByUser(this.userId).subscribe({
+        next: (data) => {
+          this.libros = data;
+        },
+        error: (error) => {
+          console.error('Error al obtener libros:', error);
+        }
+      });
+    }
   }
 
   agregarLibro() {
@@ -28,7 +48,6 @@ export class MisLibrosComponent implements OnInit {
   }
 
   verLibro(id: number) {
-    this.router.navigate([`/verLibro/${id}`]); //aquí es donde deberia de implementar la lógica
+    this.router.navigate([`/verLibro/${id}`]);
   }
-  
 }

@@ -28,13 +28,13 @@ export class ClubService {
     });
     return this.http.post(`${this.apiUrl}/clubs`, clubData, { headers });
   }
-  
+
   // Eliminar un club
   deleteClub(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/clubs/delete/${id}`);
   }
 
-
+  // Actualizar un club
   updateClub(id: string, clubData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/clubs/${id}`, clubData);
   }
@@ -42,5 +42,32 @@ export class ClubService {
   // Obtener todos los libros
   getBooks(): Observable<any> {
     return this.http.get(`${this.apiUrl}/books`);
+  }
+
+  // Obtener clubs creados por el usuario
+  getClubsByUser(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get(`${this.apiUrl}/clubs/user`, { headers });
+  }
+
+  // Obtener clubs donde el usuario es miembro
+  getClubsAsMember(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get(`${this.apiUrl}/clubs/member`, { headers });
+  }
+
+  // Unirse a un club
+  joinClub(idClub: number, email: string, age: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post(`${this.apiUrl}/members/join`, { idClub, email, age }, { headers });
   }
 }
