@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ClubService } from '../services/club.service';
-import { BookService } from '../services/book.service';
+import { ClubService } from '../../services/club.service';
+import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
-import { Users_Service } from '../services/users.service';
+import { Users_Service } from '../../services/users.service';
 
 @Component({
   selector: 'app-agregar-clubs',

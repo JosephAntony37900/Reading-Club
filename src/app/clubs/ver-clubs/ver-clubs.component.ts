@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ClubService } from '../services/club.service';
-import { MemberService } from '../services/member.service';
+import { ClubService } from '../../services/club.service';
+import { MemberService } from '../../services/member.service';
 import { Router } from '@angular/router';
-import { Users_Service } from '../services/users.service';
+import { Users_Service } from '../../services/users.service';
 
 @Component({
   selector: 'app-ver-clubs',

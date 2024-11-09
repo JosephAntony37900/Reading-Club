@@ -27,7 +27,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    flex-grow: 1; /* Aumentar la flexibilidad para tomar el espacio restante */
+    flex-grow: 1; 
   }
   
   
@@ -55,7 +55,7 @@
   .nav-icon-container {
     display: flex;
     align-items: center;
-    margin-left: auto; /* Mueve los íconos a la derecha */
+    margin-left: auto; 
   }
   
   .nav-icon-profile, .nav-icon-logout {
@@ -66,7 +66,7 @@
   
   .nav-icon-profile fa-icon, .nav-icon-logout fa-icon {
     color: #fff;
-    font-size: 24px;
+    font-size: 22px;
     transition: color 0.3s;
   }
   
