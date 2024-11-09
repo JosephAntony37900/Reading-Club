@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { faBars, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { Users_Service } from '../services/users.service'; // Asegúrate de tener la ruta correcta
+import { Users_Service } from '../services/users.service';
 import { Router } from '@angular/router';
 
 @Component({
