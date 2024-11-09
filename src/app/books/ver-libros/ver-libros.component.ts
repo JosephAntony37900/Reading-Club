@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BookService } from '../services/book.service';
+import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,11 +32,11 @@ export class VerLibrosComponent implements OnInit {
   }
 
   openModal() {
-    this.showModal = true; // Mostrar modal
+    this.showModal = true; 
   }
 
   closeModal() {
-    this.showModal = false; // Ocultar modal
+    this.showModal = false; 
   }
 
   confirmDelete() {
